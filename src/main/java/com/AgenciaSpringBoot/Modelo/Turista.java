@@ -1,0 +1,67 @@
+package com.AgenciaSpringBoot.Modelo;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+@Data
+@Entity
+@Table(name = "turista")
+@ToString
+@SQLDelete(sql = "UPDATE person SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
+@Where(clause = "deleted_at is null")
+@Proxy(lazy = false)
+public class Turista implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "documento")
+    private String documento;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private List<Reserva> listReservas;
+
+    @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "created_at", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @Column(name = "deleted_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deletedAt;
+
+}

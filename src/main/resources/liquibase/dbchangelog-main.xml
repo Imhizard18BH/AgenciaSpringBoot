@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="1_change_001_ddl" author="Johan Morales">
+        <comment>(DDL) ADD TABLES turista, tourist_package, reserva, destino</comment>
+        <sqlFile path="classpath:liquibase/changelog/state_1/change_001_ddl.sql"
+                 splitStatements="true" stripComments="true"/>
+    </changeSet>
+
+    <changeSet id="1_change_002_ddl" author="Andres Ocampo">
+        <comment>(DDL) ADD TABLES tourist_packages_destinations</comment>
+        <sqlFile path="classpath:liquibase/changelog/state_1/change_002_ddl.sql"
+                 splitStatements="true" stripComments="true" />
+    </changeSet>
+
+</databaseChangeLog>
