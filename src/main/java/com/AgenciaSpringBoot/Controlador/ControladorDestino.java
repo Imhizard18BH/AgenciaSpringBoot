@@ -30,7 +30,7 @@ public class ControladorDestino {
     @GetMapping("/save-destino/{value}/{paqueteturistaid}")
     public ResponseEntity save(@PathVariable String value, @PathVariable Integer paqueteturistaid) {
         Destino destino = new Destino();
-        destino.setValue(value);
+        destino.setValor(value);
         destino.setPaqueteTurista(paqueteTuristaServicio.findById(paqueteturistaid));
         destino = destinoServicio.save(destino);
         return ResponseEntity.ok(destino);
